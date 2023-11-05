@@ -1,0 +1,513 @@
+---
+title: "Test2"
+author: "test2"
+date: "2021/5/12"
+output:
+html_document:
+    mathjax: null
+    highlight: null
+    theme: null
+    css: jspsych-6.3.1/css/jspsych.css
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
+```
+
+
+
+```{r}
+library(htmltools)
+tagList(
+tags$script(src="jspsych-6.3.1/jspsych.js"),
+tags$script(src="jspsych-6.3.1/plugins/jspsych-instructions.js"),
+
+tags$script(src="jspsych-6.3.1/plugins/jspsych-survey-text.js"),
+tags$script(src="jspsych-6.3.1/plugins/jspsych-survey-likert.js"),
+tags$script(src="jspsych-6.3.1/plugins/jspsych-survey-multi-choice.js"),
+tags$script(src="jspsych-6.3.1/plugins/jspsych-html-keyboard-response.js"),
+tags$script(src="jspsych-6.3.1/plugins/jspsych-fullscreen.js"),
+)
+```
+
+
+
+```{js}
+var instructions ={
+    type:'html-keyboard-response',
+    stimulus: "<p style='text-align:left'>この課題では以下のような文章が50個提示されます。</p>"+
+    "<p style='test-align:left;color:black;font-size:15pt;'>保母　郵便局</p>"+
+    "<p style='text-align:left'>これらの56の文章が先ほど覚えていただいた26の文章に存在したかを一つずつ判断してもらいます。</p>"+
+    "<p style='text-align:left'>もし画面に提示された文章が覚えた文章と一致していたら f を押してください</p>"+
+    "<p style='text-align:left'>もし画面に提示された文章が覚えた文章と一致してなかったら j を押してください</p>"+
+    "<p style='test-align:left'>また、一致・不一致を判断していただいた後にその判断の直感性を主観報告していただきます。</p>" +
+    "<p style='test-align:left;color:red;font-size:13pt;'><注意事項></p>"+
+    "<p style='test-align:left'>課題を行っている間、ブラウザを閉じると、課題が終了し、結果が残りません。実験者の指示があるまで、ブラウザを閉じない(右上の×をおさない)ようにお願いします。</p>" +
+    "<p style='test-align:left'>刺激は3秒経過すると自動で消えてしまうので、それまでに判断するようお願いします。/p>" ,
+    
+　　post_trial_gap:1000
+};
+var fullscreen = {
+  type: 'fullscreen',
+  message: '<p>以下のボタンをクリックすると，画面は全画面表示に切り替わります。全画面表示を止めたい場合はEscキーを押してください。</p>',
+  button_label: "全画面表示に切り替え",
+  fullscreen_mode: true,
+};
+ var end_fullscreen = {
+      type: 'fullscreen',
+      fullscreen_mode: false, // 全画面表示を解除
+    };
+//var fix_duration = function() {
+  //     return Math.floor( Math.random() * 1500 ) + 1000;
+    // };
+//var fixation = {
+  //      type: 'html-keyboard-response',
+    //    stimulus: '<div style="font-size:60px"> + </div>',
+      //  choices: jsPsych.NO_KEYS,
+        //trial_duration: fix_duration,
+      //};
+var stimuli = [
+  {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>軍人</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>劇場</p>"
+    ],
+    data: { no:'1', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+  {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>警官</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>工場</p>"
+    ],
+    data: { no:'2', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+  {
+    stimulus:  [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>保母</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>本屋</p>"
+    ],
+    data: { no:'3', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+  {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>医師</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>銀行</p>"
+    ],
+    data: { no:'4', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+  {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>農家</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>会社</p>"
+    ],
+    data: { no:'5', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+  {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>秘書</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>市場</p>"
+    ],
+    data: { no:'6', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+  {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>先生</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>温泉</p>"
+    ],
+    data: { no:'7', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+  {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>声優</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>洞窟</p>"
+    ],
+    data: { no:'8', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+  {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>漁師</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>床屋</p>"
+    ],
+    data: { no:'9', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>大工</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>教会</p>"
+    ],
+    data: { no:'10', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>船長</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>海辺</p>"
+    ],
+    data: { no:'11', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>力士</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>公園</p>"
+    ],
+    data: { no:'12', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>船長</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>会社</p>"
+    ],
+    data: { no:'13', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>住職</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>市場</p>"
+    ],
+    data: { no:'14', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>大工</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>薬局</p>"
+    ],
+    data: { no:'15', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>歌手</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>病院</p>"
+    ],
+    data: { no:'16', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>歌手</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>温泉</p>"
+    ],
+    data: { no:'17', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>住職</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>洞窟</p>"
+    ],
+    data: { no:'18', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>力士</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>床屋</p>"
+    ],
+    data: { no:'19', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>画家</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>神社</p>"
+    ],
+    data: { no:'20', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>俳優</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>学校</p>"
+    ],
+    data: { no:'21', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>駅員</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>空港</p>"
+    ],
+    data: { no:'22', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>画家</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>銀行</p>"
+    ],
+    data: { no:'23', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>俳優</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>薬局</p>"
+    ],
+    data: { no:'24', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>駅員</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>病院</p>"
+    ],
+    data: { no:'25', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>画家</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>pン戦</p>"
+    ],
+    data: { no:'26', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+   {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>俳優</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>洞窟</p>"
+    ],
+    data: { no:'27', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+     {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>駅員</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>床屋</p>"
+    ],
+    data: { no:'28', stim_type: 'congruent', correct_key_press: 'f'}
+  },
+ 
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>軍人</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>本屋</p>"
+    ],
+    data: { no:'29', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>警官</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>劇場</p>"
+    ],
+    data: { no:'30', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>保母</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>工場</p>"
+    ],
+    data: { no:'31', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>医師</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>市場</p>"
+    ],
+    data: { no:'32', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>農家</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>銀行</p>"
+    ],
+    data: { no:'33', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>秘書</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>会社</p>"
+    ],
+    data: { no:'34', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>先生</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>床屋</p>"
+    ],
+    data: { no:'35', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>声優</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>温泉</p>"
+    ],
+    data: { no:'36', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>漁師</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>洞窟</p>"
+    ],
+    data: { no:'37', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>大工</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>公園</p>"
+    ],
+    data: { no:'38', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>船長</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>教会</p>"
+    ],
+    data: { no:'39', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>力士</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>海辺</p>"
+    ],
+    data: { no:'40', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>船長</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>病院</p>"
+    ],
+    data: { no:'41', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>住職</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>会社</p>"
+    ],
+    data: { no:'42', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>大工</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>市場</p>"
+    ],
+    data: { no:'43', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>歌手</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>薬局</p>"
+    ],
+    data: { no:'44', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>歌手</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>床屋</p>"
+    ],
+    data: { no:'45', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>住職</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>温泉</p>"
+    ],
+    data: { no:'46', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>力士</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>洞窟</p>"
+    ],
+    data: { no:'47', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>画家</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>空港</p>"
+    ],
+    data: { no:'48', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>俳優</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>神社</p>"
+    ],
+    data: { no:'49', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>駅員</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>学校</p>"
+    ],
+    data: { no:'50', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>画家</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>病院</p>"
+    ],
+    data: { no:'51', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>俳優</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>銀行</p>"
+    ],
+    data: { no:'52', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>駅員</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>薬局</p>"
+    ],
+    data: { no:'53', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>画家</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>床屋</p>"
+    ],
+    data: { no:'54', stim_type: 'incongruent', correct_key_press: 'j'}
+  },
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>俳優</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>温泉</p>"
+    ],
+    data: { no:'55', stim_type: 'incongruent', correct_key_press: 'j'}
+  }
+  ,
+  
+    {
+    stimulus: [
+    "<p style='position: absolute; right: 65%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>駅員</p>" ,"<p style='position: absolute; right: 35%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>洞窟</p>"
+    ],
+    data: { no:'56', stim_type: 'incongruent', correct_key_press: 'j'}
+  }
+];
+
+var scale = [
+  "1.非常にあてはまる", 
+  "2.かなりあてはまる", 
+  "3.ややあてはまる", 
+  "4.あまりあてはまらない",
+  "5.ほとんどあてはまらない",
+  "6.全くあてはまらない"
+];
+
+var likert = {
+  type: 'survey-likert',
+  preamble: '<p> 以下の文章をよく読んで，あなたにあてはまる選択肢をクリックしてください。</p>',
+  questions: [
+    {prompt: "直感的に判断をした。", name: 'intuitive', labels: scale,required: true},
+   
+  ],
+};
+
+
+/*fan課題*/
+var stroop = {
+  timeline: [{
+    type: "html-keyboard-response",
+    choices: ["f","j"],
+    trial_duration: 3000,
+    response_ends_trial: false,
+    stimulus: jsPsych.timelineVariable('stimulus'),
+    //prompt: '学習文にあったらf,  学習文になかったらj'
+    data: jsPsych.timelineVariable('data'),
+    //on_finish: 
+    function(data){
+      var 
+      correct = 0;
+      if(data.correct_key_press == data.response){
+        correct = 1;
+      } 
+      data.correct = correct;
+    },
+    //post_trial_gap: function() {
+      //  return (700) ;
+    //}
+   // return Math.floor(Math.random() * 1500) +
+  }],
+  //timeline_variables: stimuli,
+  //timeline_variables: fixation,
+  //sample: {type: 'fixed-repetitions',size: 1},
+  
+  };
+
+var fixation={
+  type: 'html-keyboard-response',
+  stimulus: "<p style='position: absolute; right: 50%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>+</p>",
+  choices: jsPsych.NO_KEYS,
+  trial_duration: 1000,
+  
+  };
+
+var block={
+timeline:[fixation,stroop,likert],
+timeline_variables: stimuli,
+sample: {
+    type: 'fixed-repetitions',
+    size: 1,
+  },
+
+}
+var finish = {
+type: "html-keyboard-response",
+stimulus: "<p style='position: absolute; right: 50%; top: 50%;transform: translateY(-50%) translateX(50%);-webkit-transform: translateY(-50%)translateX(50%);color:black;font-size:50pt;'>終了</p>",
+　　post_trial_gap:1000
+};
+//position: absolute; right: 50%; top: 50%;
+/*デブリーフィングの設定*/
+var debrief = {
+  type: "html-keyboard-response",
+  stimulus: function() {
+    var incongruent_trials = jsPsych.data.get().filter({stim_type: 'incongruent'}).count();
+    var congruent_trials = jsPsych.data.get().filter({stim_type: 'congruent'}).count();
+    var accuracy = Math.round(jsPsych.data.get().filter({correct: 1}).count() / (incongruent_trials + congruent_trials) * 100);
+    var congruent_rt = Math.round(jsPsych.data.get().filter({correct: 1, stim_type: 'congruent'}).select('rt').mean());
+    var incongruent_rt = Math.round(jsPsych.data.get().filter({correct: 1, stim_type: 'incongruent'}).select('rt').mean());
+    return "<p>あなたの正答率は，<strong>"+accuracy+"%</strong>でした。</p> " +
+    "<p>色と単語が一致していた時にボタンを押すまでにかかる時間の平均は， <strong>" + congruent_rt + "ms</strong>でした。</p>"+
+    "<p>色と単語が不一致だった時にボタンを押すまでにかかる時間の平均は， <strong>" + incongruent_rt + "ms</strong>でした。</p>"+
+    "<p>キーボードのキーをどれか押すと画面に結果の記録が表示されます。ご参加ありがとうございました。</p>";
+  }
+};
+
+var timeline = [];
+timeline.push(fullscreen);
+timeline.push(instructions);
+timeline.push(block);
+timeline.push(finish);
+timeline.push(debrief);
+
+jsPsych.init({
+  timeline: timeline,
+  on_finish: function() {
+  jsPsych.data.get().localSave('csv', 'data.csv');
+  }
+});
+```
+
