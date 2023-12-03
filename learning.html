@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="jspsych/dist/jspsych.js"></script>
+  <script src="jspsych/dist/plugin-html-keyboard-response.js"></script>
+  <script src="jspsych/dist/plugin-survey-text.js"></script>
+  <link rel="stylesheet" href="jspsych/dist/jspsych.css">
+</head>
+<body></body>
+<script>
+
+var jsPsych = initJsPsych({
+      on_finish: () => {
+        jsPsych.data.displayData();
+        
+      },
+    }); 
+var learning_sentences = ["ゴミ箱がホテルにある","ゴミ箱がホテルにある"];//ここに学習文
+var timeline =[];
+var learningStimulus = [];
+
+var numRepetitions = 3;
+var trial_count = 0;
+var correct_trial = [];
+var two_correct_trial = [];
+var instruction = {
+    type: jsPsychHtmlKeyboardResponse,
+    stimulus:
+    '学習段階を始めます。これから画面上に５つの矢印（>>>>>など）が表示されます。<br>' +
+    '中央の矢印が左向き（<）なら「f」キーを<br>' +
+    '中央の矢印が右向き（>）なら「j」キーを<br>' +
+    'なるべく早く，正確に押してください<br><br>' +
+    '準備ができたら「f」キーか「j」キーを押して課題を開始してください。',
+    choices: ['f', 'j'],
+    
+};
+
+// ランダムな学習リストを生成する関数
+//刺激の提示への反応のプロセス
+var createTrial = (stim) => {
+      var trial = {
+        type: jsPsychHtmlKeyboardResponse,
+        stimulus: `<p style="font-size: 34px">${stim}</p>`,
+        choices: ['f', 'j'],
+        trial_duration: 7000,
+        post_trial_gap: 500,
+        data:{
+            task:'learning',
+            correct_number:0
+        },
+      };
+      return trial;
+    };
+//trialとfixationを固める。
+var createBlock = (stim) => {
+      var trial = createTrial(stim);
+      var block = {
+        timeline: [trial],
+      };
+      return block;
+    };
+
+//2回目の学習
+const learning_trials = learning_sentences.map((stim)=> createTrial(stim));
+const trialsRandom = jsPsych.randomization.repeat(learning_trials,1);
+const learning = {
+  timeline: trialsRandom,
+};
+
+//jsPsych.run(q_trials)
+
+//trialsRandom.push(instruction_test);
+
+//jsPsych.run([instruction,learning,instruction_test,question]);
+
+var loopBlock = {
+  timeline: [instruction, learning],
+  
+
+};
+jsPsych.run([loopBlock]);
+
+</script>
+</html>
